@@ -1,3 +1,6 @@
 [submodule "awesome/.config/awesome/lain"]
 	path = awesome/.config/awesome/lain
 	url = https://github.com/lcpz/lain
+[submodule "zsh/.config/zsh/pure"]
+	path = zsh/.config/zsh/pure
+	url = https://github.com/sindresorhus/pure.git
