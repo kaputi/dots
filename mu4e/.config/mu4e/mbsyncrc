@@ -1,0 +1,90 @@
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+# ACCOUNT INFORMATION
+IMAPAccount eduloni3-gmail
+# Address to connect to
+Host imap.gmail.com
+User eduloni3@gmail.com
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.config/mu4e/mbsyncpass-eduloni3.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# THEN WE SPECIFY THE LOCAL AND REMOTE STORAGE
+# - THE REMOTE STORAGE IS WHERE WE GET THE MAIL FROM (E.G., THE
+#   SPECIFICATION OF AN IMAP ACCOUNT)
+# - THE LOCAL STORAGE IS WHERE WE STORE THE EMAIL ON OUR COMPUTER
+
+# REMOTE STORAGE (USE THE IMAP ACCOUNT SPECIFIED ABOVE)
+IMAPStore eduloni3-gmail-remote
+Account eduloni3-gmail
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p ~/Maildir/eduloni3-gmail)
+MaildirStore eduloni3-gmail-local
+Path ~/Maildir/eduloni3-gmail/
+Inbox ~/Maildir/eduloni3-gmail/INBOX
+# REQUIRED ONLY IF YOU WANT TO DOWNLOAD ALL SUBFOLDERS; SYNCING SLOWS DOWN
+# SubFolders Verbatim
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel eduloni3-gmail-inbox
+Master :eduloni3-gmail-remote:
+Slave :eduloni3-gmail-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel eduloni3-gmail-trash
+Master :eduloni3-gmail-remote:"[Gmail]/Bin"
+Slave :eduloni3-gmail-local:"[eduloni3].Bin"
+Create Both
+Expunge Both
+SyncState *
+
+Channel eduloni3-gmail-sent
+Master :eduloni3-gmail-remote:"[Gmail]/Sent Mail"
+Slave :eduloni3-gmail-local:"[eduloni3].Sent Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel eduloni3-gmail-all
+Master :eduloni3-gmail-remote:"[Gmail]/All Mail"
+Slave :eduloni3-gmail-local:"[eduloni3].All Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel eduloni3-gmail-starred
+Master :eduloni3-gmail-remote:"[Gmail]/Starred"
+Slave :eduloni3-gmail-local:"[eduloni3].Starred"
+Create Both
+Expunge Both
+SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group eduloni3-gmail
+Channel eduloni3-gmail-inbox
+Channel eduloni3-gmail-sent
+Channel eduloni3-gmail-trash
+Channel eduloni3-gmail-all
+Channel eduloni3-gmail-starred
+
+
+# ================================================================================
+
