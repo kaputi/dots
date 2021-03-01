@@ -11,7 +11,6 @@
   font-size: 32px;
 }
 
-/* Notifications */
 
 .title {
   font-weight: bold;
@@ -27,7 +26,9 @@
 }
 
 .blurredBG.notification {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(45,45,47,0.8);
+  color: #ffffff;
+
 }
 
 .blurredBG.notification.critical {
@@ -41,11 +42,11 @@
 /* Labels */
 
 label {
-  color: #322;
+  color: #ffffff;
 }
 
 label.notification {
-  color: #322;
+  color: #ffffff;
 }
 
 label.critical {
