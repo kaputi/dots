@@ -17,7 +17,7 @@ RC.vars = require("main.user-variables")
 modkey = RC.vars.modkey
 
 -- {{{ Error handling -- }}}
-require("main.error-handling")
+-- require("main.error-handling")
 
 -- {{{ Themes
 require("main.theme")
@@ -82,8 +82,6 @@ root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Statusbar: Wibar
 require("deco.statusbar")
@@ -105,13 +103,15 @@ require("main.signals")
 -- {{{ autolaunch 
 awful.spawn.with_shell("picom -b")
 awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/WallpapersDev/")
--- awful.spawn.with_shell("deadd-notification-center")
+awful.spawn.with_shell("deadd-notification-center")
 awful.spawn.with_shell("traylaunch.sh")
 awful.spawn.with_shell("xbindkeys")
 awful.spawn.with_shell("libinput-gestures-setup start")
-awful.spawn.with_shell("batteryAlert.sh") 
+awful.spawn.with_shell("batteryAlert.sh")
+awful.spawn.with_shell("emacs --daemon")
 awful.spawn.with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1") 
 awful.spawn.with_shell('xinput --set-prop "SYNA1D31:00 06CB:CD48 Touchpad" "libinput Accel Speed" 0.7') 
 awful.spawn.with_shell('xinput --set-prop "SYNA1D31:00 06CB:CD48 Touchpad" "libinput Tapping Enabled" 1') 
 
 -- }}}
+beautiful.useless_gap = 5

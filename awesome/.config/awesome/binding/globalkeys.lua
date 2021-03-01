@@ -47,6 +47,13 @@ function _M.get()
               {description = "show main menu", group = "awesome"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    -- brightness keys
+    awful.key({}, "XF86MonBrightnessUp",  function () awful.spawn.with_shell("myBacklight -inc") end,
+      {description = "increase brightness", group = "screen"}),
+
+    awful.key({}, "XF86MonBrightnessDown",  function () awful.spawn.with_shell("myBacklight -dec") end,
+      {description = "increase brightness", group = "screen"}),
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -96,10 +103,6 @@ function _M.get()
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -127,32 +130,17 @@ function _M.get()
 
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    -- Resize
+    -- Resize (Floating)
     --awful.key({ modkey, "Control" }, "Left",  function () awful.client.moveresize( 20,  20, -40, -40) end),
     --awful.key({ modkey, "Control" }, "Right", function () awful.client.moveresize(-20, -20,  40,  40) end),
     awful.key({ modkey, "Control" }, "Down",  
-              function () awful.client.moveresize( 0, 0, 0, -20) end),
+              function () awful.client.moveresize( 0, 0, 0,- 50) end),
     awful.key({ modkey, "Control" }, "Up",    
-              function () awful.client.moveresize( 0, 0, 0,  20) end),
+              function () awful.client.moveresize( 0, 0, 0, 50) end),
     awful.key({ modkey, "Control" }, "Left",  
-              function () awful.client.moveresize( 0, 0, -20, 0) end),
+              function () awful.client.moveresize( 0, 0, -50, 0) end),
     awful.key({ modkey, "Control" }, "Right", 
-              function () awful.client.moveresize( 0, 0,  20, 0) end),
-
-    -- Move
-    awful.key({ modkey, "Shift"   }, "Down",  
-              function () awful.client.moveresize(  0,  20,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Up",    
-              function () awful.client.moveresize(  0, -20,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Left",  
-              function () awful.client.moveresize(-20,   0,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Right", 
-              function () awful.client.moveresize( 20,   0,   0,   0) end),
-
-    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              function () awful.client.moveresize( 0, 0, 50, 0) end)
 
   )
 

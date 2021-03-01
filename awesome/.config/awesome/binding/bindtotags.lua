@@ -24,8 +24,6 @@ function _M.get(globalkeys)
           local tag = screen.tags[i]
           if tag then
             tag:view_only()
-          local master =   awful.client.getmaster()
-          client.focus = master
           end
         end,
         {description = "view tag #"..i, group = "tag"}),

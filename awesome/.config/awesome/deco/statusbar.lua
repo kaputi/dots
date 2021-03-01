@@ -6,7 +6,7 @@ local awful     = require("awful")
 local wibox = require("wibox")
 
 -- Lain widgets
-local lain = require("lain")
+-- local lain = require("lain")
 
 -- Custom Local Library: Common Functional Decoration
 local deco = {
@@ -43,23 +43,23 @@ awful.screen.connect_for_each_screen(function(s)
     awful.button({ }, 5, function () awful.layout.inc(-1) end)
   ))
 
-local mycpu= lain.widget.cpu( {
-    settings = function ()
-     widget:set_markup("CPU: " .. cpu_now[1].usage .. "% " .. cpu_now[2].usage .. "% ".. cpu_now[3].usage .. "% ".. cpu_now[4].usage .. "% ".. cpu_now[5].usage .. "% ".. cpu_now[6].usage .. "% ".. cpu_now[7].usage .. "% ".. cpu_now[8].usage .. "% ") 
-    end
-   })
-local mymem = lain.widget.mem({
-  settings = function()
-    widget:set_markup("RAM: " .. mem_now.perc .. "% ")
-  end
-})
-local mybattery = lain.widget.bat({
-battery = "BAT0",
-    settings = function ()
-      widget:set_markup("BAT: " .. bat_now.perc .. "% ")
-    end
-  })
-
+-- local mycpu= lain.widget.cpu( {
+--     settings = function ()
+--      widget:set_markup("CPU: " .. cpu_now[1].usage .. "% " .. cpu_now[2].usage .. "% ".. cpu_now[3].usage .. "% ".. cpu_now[4].usage .. "% ".. cpu_now[5].usage .. "% ".. cpu_now[6].usage .. "% ".. cpu_now[7].usage .. "% ".. cpu_now[8].usage .. "% ")
+--     end
+--    })
+-- local mymem = lain.widget.mem({
+--   settings = function()
+--     widget:set_markup("RAM: " .. mem_now.perc .. "% ")
+--   end
+-- })
+-- local mybattery = lain.widget.bat({
+-- battery = "BAT0",
+--     settings = function ()
+--       widget:set_markup("BAT: " .. bat_now.perc .. "% ")
+--     end
+--   })
+--
   -- Create a taglist widget
   s.mytaglist = awful.widget.taglist {
     screen  = s,
@@ -90,11 +90,11 @@ battery = "BAT0",
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
-      mymem,
-      wibox.widget.textbox(" | "),
-      mycpu,
-      wibox.widget.textbox(" | "),
-      mybattery,
+      -- mymem,
+      -- wibox.widget.textbox(" | "),
+      -- mycpu,
+      -- wibox.widget.textbox(" | "),
+      -- mybattery,
       wibox.widget.textbox(" | "),
       mytextclock,
       wibox.widget.systray(),
