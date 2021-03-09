@@ -102,7 +102,8 @@ myNewKeys =
       ,("M-<Return>", spawn (myTerminal)) -- terminal
       ,("M-d", spawn "rofi -show run") -- dmenu
       ,("M-<Space>", spawn "rofi -modi 'drun' -show drun") --app launcher
-      ,("M-<F2>", spawn "google-chrome-stable")-- google chrome
+      -- ,("M-<F2>", spawn "google-chrome-stable")-- google chrome
+      ,("M-<F2>", spawn "brave")-- brve browser
       -- Kill windows
       ,("M-q", kill1)
       --layouts
@@ -255,12 +256,12 @@ myStartupHook = do
   spawnOnce "picom -b &"
   spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
   spawnOnce "deadd-notification-center &"
-  spawnOnce "bateryAlert.sh &"
-  spawnOnce "emacs --daemon "
-  spawnOnce "traylaunch.sh "
+  spawnOnce "batteryAlert.sh &"
+  -- spawnOnce "emacs --daemon &"
+  spawnOnce "traylaunch.sh & "
   spawnOnce " trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request --transparent true --alpha 140 --tint 0x666666 --height 40 --iconspacing 7 &"
   spawnOnce "exec xinput --set-prop 'SYNA1D31:00 06CB:CD48 Touchpad' 'libinput Accel Speed' 0.7"
-  spawnOnce "xinput --set-prop 'SYNA1D31:00 06CB:CD48 Touchpad' 'libinput Tapping Enabled' 1"
+  spawnOnce "exec xinput --set-prop 'SYNA1D31:00 06CB:CD48 Touchpad' 'libinput Tapping Enabled' 1"
 #+END_SRC
 * Main
 #+BEGIN_SRC haskell
