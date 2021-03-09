@@ -53,3 +53,13 @@
 (package! visual-fill-column)
 ;; nicer bullets for org mode
 (package! org-bullets)
+;; ogr super agenda
+(package! org-super-agenda)
+;; keep org files separated with projects
+;; (package! org-projectile)
+
+;; beterautocomplete
+(package! company-box)
+
+;; vimrc language and syntax for making my vimrc with org mode
+(package! vimrc-mode)
