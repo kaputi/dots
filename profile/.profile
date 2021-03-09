@@ -6,7 +6,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ###############################scales gtk3
-export GDK_SCALE=2 
+export GDK_SCALE=2
 #do not scale fonts
 export GDK_DPI_SCALE=0.5
 
@@ -18,7 +18,7 @@ XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CONFIG_HOME
 ##################################################
 export EDITOR=nvim
-export VISUAL=code
+export VISUAL=nvim
 export TERMINAL=alacritty
 # export BROWSER=google-chrome-stable
 export PAGER=more
