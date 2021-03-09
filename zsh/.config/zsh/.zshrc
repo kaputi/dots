@@ -83,8 +83,11 @@ alias :Q='exit'
 
 alias vi='nvim'
 alias vim='nvim'
-alias nv='nvim'
+# alias nv='nvim'
+alias nv='~/nvim.appimage'
 
+# alias e='sw emacsclient -c'
+alias e='emacsclient -t'
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias rm="rm -i"                          # confirm before removing
@@ -139,4 +142,21 @@ ex ()
   else
     echo "'$1' is not a valid file"
   fi
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Codi
+# Usage: codi [filetype] [filename]
+codi() {
+  local syntax="${1:-python}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax" "$@"
 }
