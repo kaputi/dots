@@ -9,6 +9,8 @@ parse_git_branch() {
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
+mkdir -p ~/.cache/zsh
+touch ~/.cache/zsh/history
 HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
@@ -87,7 +89,7 @@ alias vim='nvim'
 alias nv='~/nvim.appimage'
 
 # alias e='sw emacsclient -c'
-alias e='emacsclient -t'
+alias e='emacsclient -t -a='
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias rm="rm -i"                          # confirm before removing
