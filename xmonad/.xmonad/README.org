@@ -104,6 +104,7 @@ myNewKeys =
       ,("M-<Space>", spawn "rofi -modi 'drun' -show drun") --app launcher
       -- ,("M-<F2>", spawn "google-chrome-stable")-- google chrome
       ,("M-<F2>", spawn "brave")-- brve browser
+      ,("M-<F1>", spawn "pcmanfm")-- brve browser
       -- Kill windows
       ,("M-q", kill1)
       --layouts
@@ -134,6 +135,9 @@ myNewKeys =
         -- Multimedia  keys
         ,("<XF86MonBrightnessUp>", spawn "myBacklight -inc")
         ,("<XF86MonBrightnessDown>", spawn "myBacklight -dec")
+
+        -- prompts
+        ,("M-c", spawn "quickconfig")
 
     ]
 
