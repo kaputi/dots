@@ -85,11 +85,11 @@ alias :Q='exit'
 
 alias vi='nvim'
 alias vim='nvim'
-# alias nv='nvim'
-alias nv='~/nvim.appimage'
+alias nv='nvim'
+# alias nv='~/nvim.appimage'
 
 # alias e='sw emacsclient -c'
-alias e='emacsclient -t -a='
+alias e='emacsclient -c -a emacs'
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias rm="rm -i"                          # confirm before removing
