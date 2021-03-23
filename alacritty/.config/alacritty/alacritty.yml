@@ -31,21 +31,48 @@ colors:
 background_opacity: 0.1
 
 font:
-  normal:
-    family: "Monaco"
-    style: Regular
-  bold:
-    family: "Monaco"
-    style: Bold
-  italic:
-    family: "Monaco"
-    style: Italic
-  bold_italic:
-    family: "Monaco"
-    style: Bold Italic
+  ## Monaco
+  # normal:
+  #   family: "Monaco"
+  #   style: "Regular"
+  # bold:
+  #   family: "Monaco"
+  #   style: "Bold"
+  # italic:
+  #   family: "Monaco"
+  #   style: "italic"
+  # bold_italic:
+  #   family: "Monaco"
+  #   style: "Bold Italic"
+  # size: 11.0
 
-  # Point size
-  size: 11.0
+  ## Consola ========
+  # normal:
+  #   family: "Consolas"
+  #   style: "Regular"
+  # bold:
+  #   family: "Consolas"
+  #   style: "Bold"
+  # italic:
+  #   family: "Consolas"
+  #   style: "italic"
+  # size: 12
+
+  ## Fira code =====
+  normal:
+    family: "Fira Code"
+    # style: "Regular"
+    style: "Retina"
+  bold:
+    family: "Fira Code"
+    style: "Bold"
+  italic:
+    family: "Fira Code"
+    style: "Light"
+  bold_italic:
+    family: "Fira Code"
+    style: "SemiBold"
+  size: 11.5
 
   offset:
     x: 0
@@ -83,4 +110,4 @@ key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
-  - { key: N, mods: Control, action: SpawnNewInstance }
+  # - { key: N, mods: Control, action: SpawnNewInstance }
