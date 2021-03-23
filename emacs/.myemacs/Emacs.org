@@ -81,7 +81,7 @@ I am using the Monaco and Cantarell fonts for this configuration which will more
 #+begin_src emacs-lisp
 
 (set-face-attribute 'default nil :font "Monaco" :height bumbler/default-font-size)
-(set-face-attribute 'fixed-pitch nil :font "Monaco" :height bumbler/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "Cantarell" :height bumbler/default-font-size)
 (set-face-attribute 'variable-pitch nil :font "Cantarell" :height bumbler/default-font-size :weight 'regular)
 #+end_src
 

@@ -158,9 +158,9 @@
                   eshel-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(setq doom-font (font-spec :family "Monaco" :size 30))
-(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 30))
-(setq doom-big-font (font-spec :family "Monaco" :size 40))
+;; (setq doom-font (font-spec :family "Monaco" :size 30))
+;; (setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 30))
+;; (setq doom-big-font (font-spec :family "Monaco" :size 40))
 
 ;; Good overall theme
 (setq doom-theme 'doom-material)
