@@ -1,6 +1,6 @@
 -- Standard awesome library
 local gears = require("gears")
-local awful     = require("awful")
+local awful = require("awful")
 
 -- Wibox handling library
 local wibox = require("wibox")
@@ -11,12 +11,14 @@ local wibox = require("wibox")
 -- Custom Local Library: Common Functional Decoration
 local deco = {
   wallpaper = require("deco.wallpaper"),
-  taglist   = require("deco.taglist"),
-  tasklist  = require("deco.tasklist")
+  taglist = require("deco.taglist"),
+  tasklist = require("deco.tasklist")
 }
 
-local taglist_buttons  = deco.taglist()
+local taglist_buttons = deco.taglist()
 local tasklist_buttons = deco.tasklist()
+
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 
 local _M = {}
 
@@ -37,53 +39,97 @@ awful.screen.connect_for_each_screen(function(s)
   -- We need one layoutbox per screen.
   s.mylayoutbox = awful.widget.layoutbox(s)
   s.mylayoutbox:buttons(gears.table.join(
-    awful.button({ }, 1, function () awful.layout.inc( 1) end),
-    awful.button({ }, 3, function () awful.layout.inc(-1) end),
-    awful.button({ }, 4, function () awful.layout.inc( 1) end),
-    awful.button({ }, 5, function () awful.layout.inc(-1) end)
-  ))
+      awful.button({}, 1, function()
+        awful.layout.inc(1)
+      end), awful.button({}, 3, function()
+        awful.layout.inc(-1)
+      end), awful.button({}, 4, function()
+        awful.layout.inc(1)
+      end), awful.button({}, 5, function()
+        awful.layout.inc(-1)
+      end)))
 
--- local mycpu= lain.widget.cpu( {
---     settings = function ()
---      widget:set_markup("CPU: " .. cpu_now[1].usage .. "% " .. cpu_now[2].usage .. "% ".. cpu_now[3].usage .. "% ".. cpu_now[4].usage .. "% ".. cpu_now[5].usage .. "% ".. cpu_now[6].usage .. "% ".. cpu_now[7].usage .. "% ".. cpu_now[8].usage .. "% ")
---     end
---    })
--- local mymem = lain.widget.mem({
---   settings = function()
---     widget:set_markup("RAM: " .. mem_now.perc .. "% ")
---   end
--- })
--- local mybattery = lain.widget.bat({
--- battery = "BAT0",
---     settings = function ()
---       widget:set_markup("BAT: " .. bat_now.perc .. "% ")
---     end
---   })
---
+  -- battery infos from freedesktop upower
+  local mybattery = awful.widget.watch({
+    awful.util.shell, "-c",
+    "upower -i /org/freedesktop/UPower/devices/battery_BAT0 | sed -n '/present/,/icon-name/p'"
+  }, 30, function(widget, stdout)
+    local bat_now = {
+      present = "N/A",
+      state = "N/A",
+      warninglevel = "N/A",
+      energy = "N/A",
+      energyfull = "N/A",
+      energyrate = "N/A",
+      voltage = "N/A",
+      percentage = "N/A",
+      capacity = "N/A",
+      icon = "N/A"
+    }
+
+    for k, v in string.gmatch(stdout, '([%a]+[%a|-]+):%s*([%a|%d]+[,|%a|%d]-)') do
+      if k == "present" then
+        bat_now.present = v
+      elseif k == "state" then
+        bat_now.state = v
+      elseif k == "warning-level" then
+        bat_now.warninglevel = v
+      elseif k == "energy" then
+        bat_now.energy = string.gsub(v, ",", ".") -- Wh
+      elseif k == "energy-full" then
+        bat_now.energyfull = string.gsub(v, ",", ".") -- Wh
+      elseif k == "energy-rate" then
+        bat_now.energyrate = string.gsub(v, ",", ".") -- W
+      elseif k == "voltage" then
+        bat_now.voltage = string.gsub(v, ",", ".") -- V
+      elseif k == "percentage" then
+        bat_now.percentage = tonumber(v) -- %
+      elseif k == "capacity" then
+        bat_now.capacity = string.gsub(v, ",", ".") -- %
+      elseif k == "icon-name" then
+        bat_now.icon = v
+      end
+    end
+
+    local state = 'N/A'
+    if bat_now.state == 'discharging' then state = '' end
+    if bat_now.state == 'charging' then state = 'charging' end
+    -- customize here
+    widget:set_text("BAT: " .. bat_now.percentage .. "% " .. state)
+  end)
+
+  -- Create cpu widget
+  local mycpu = cpu_widget({
+    width = 120,
+    step_width = 8,
+    step_spacing = 2,
+    color = '#ffffff'
+  })
+
   -- Create a taglist widget
   s.mytaglist = awful.widget.taglist {
-    screen  = s,
-    filter  = awful.widget.taglist.filter.all,
+    screen = s,
+    filter = awful.widget.taglist.filter.all,
     buttons = taglist_buttons
   }
 
   -- Create a tasklist widget
   s.mytasklist = awful.widget.tasklist {
-    screen  = s,
-    filter  = awful.widget.tasklist.filter.currenttags,
+    screen = s,
+    filter = awful.widget.tasklist.filter.currenttags,
     buttons = tasklist_buttons
   }
 
   -- Create the wibox
-  s.mywibox = awful.wibar({ position = "bottom", screen = s })
+  s.mywibox = awful.wibar({position = "bottom", screen = s})
 
   -- Add widgets to the wibox
-  s.mywibox:setup {
+  s.mywibox:setup{
     layout = wibox.layout.align.horizontal,
     { -- Left widgets
       layout = wibox.layout.fixed.horizontal,
-      RC.launcher,
-      s.mytaglist,
+      -- RC.launcher,
+      s.mytaglist
       -- s.mypromptbox,
     },
     s.mytasklist, -- Middle widget
@@ -92,14 +138,15 @@ awful.screen.connect_for_each_screen(function(s)
       -- mykeyboardlayout,
       -- mymem,
       -- wibox.widget.textbox(" | "),
-      -- mycpu,
-      -- wibox.widget.textbox(" | "),
-      -- mybattery,
+      mycpu,
+      wibox.widget.textbox(" | "),
+      mybattery,
       wibox.widget.textbox(" | "),
       mytextclock,
+      wibox.widget.textbox(" "),
       wibox.widget.systray(),
-      s.mylayoutbox,
-    },
+      s.mylayoutbox
+    }
   }
 end)
 -- }}}

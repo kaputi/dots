@@ -47,7 +47,7 @@ hide_edge_borders none
   client.focused_inactive #2F3D44 #2F3D44 #126d7a #454948
   client.unfocused        #2F3D44 #2F3D44 #126d7a #454948
   client.urgent           #CB4B16 #FDF6E3 #126d7a #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.placeholder      #000000 #0c0c0c #ffffff #000000
 
   client.background       #2B2C2B
 
@@ -61,7 +61,7 @@ gaps inner 2
 gaps outer -2
 gaps bottom 22
 
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
@@ -69,7 +69,7 @@ smart_borders on
 # => BEHAVIOUR
 ##################################################
 
-# switch WS with urgent window 
+# switch WS with urgent window
 for_window [urgent=latest] focus
 
 # maximum float window size
@@ -145,7 +145,7 @@ bindsym $mod+Shift+space floating toggle
 # Toggle sticky
 bindsym $mod+Shift+s sticky toggle
 
-# Focus parent container 
+# Focus parent container
 bindsym $mod+a focus parent
 
 # Move to scratchpad(minimize)
@@ -206,6 +206,8 @@ assign [class="Pcmanfm"] $ws1
 for_window[class="Pcmanfm"] focus
 assign [class="Google-chrome"] $ws2
 for_window [class="Google-chrome"] focus
+assign [class="Brave-browser"] $ws2
+for_window [class="Brave-browser"] focus
 assign [class="Code"] $ws3
 for_window [class="Code"] focus
 assign [class="Transmission-gtk"] $ws7
@@ -239,7 +241,7 @@ bindsym $mod+Ctrl+Left workspace prev
 # Loop through WS
 bindsym $mod+Tab workspace next
 
-# Switch to WS 
+# Switch to WS
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -326,7 +328,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 # WS back and forth with focused window
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
-  
+
 # move workspace to monitor TODO: bindcode not read by cheatsheet generator
 bindcode $mod+112 move workspace to output left
 bindcode $mod+117 move workspace to output right
@@ -350,7 +352,8 @@ bindsym Mod1+Tab exec --no-startup-id rofi  window -show
 bindsym $mod+Return exec alacritty
 
 # Google Chrome
-bindsym $mod+F2 exec google-chrome-stable
+# bindsym $mod+F2 exec google-chrome-stable
+bindsym $mod+F2 exec brave
 
 # File Manager
 bindsym $mod+F1 exec pcmanfm
@@ -366,6 +369,9 @@ bindsym $mod+t exec --no-startup-id pkill picom
 
 # Stop compositor (transparent windows)
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
+
+# Quick config
+bindsym $mod+c exec --no-startup-id quickconfig
 
 ##################################################
 # => i3

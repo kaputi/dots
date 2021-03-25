@@ -12,9 +12,8 @@ dofile(theme_path .. "elements.lua")
 -- dofile(theme_path .. "titlebar.lua")
 dofile(theme_path .. "layouts.lua")
 
-theme.awesome_icon       = theme_path .. "launcher/logo20_arch.png"
-theme.awesome_subicon    = theme_path .. "launcher/logo20_arch.png"
+theme.awesome_icon = theme_path .. "launcher/logo20_arch.png"
+theme.awesome_subicon = theme_path .. "launcher/logo20_arch.png"
 
 return theme
-
 
