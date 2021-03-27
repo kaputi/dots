@@ -120,6 +120,23 @@ awful.screen.connect_for_each_screen(function(s)
     buttons = tasklist_buttons
   }
 
+  -- df -h --output=avail /dev/nvme0n1p5 -- HOME
+  -- df -h --output=avail /dev/nvme0n1p4 -- SYS
+  local homedir = awful.widget.watch('df -h --output=avail /dev/nvme0n1p5', 30,
+      function(widget, stdout)
+        for line in stdout:gmatch('[^\r\n]+') do
+          if line ~= 'Avail' then widget:set_text('HOME:' .. line) end
+
+        end
+      end)
+
+  local sysdir = awful.widget.watch('df -h --output=avail /dev/nvme0n1p4', 30,
+      function(widget, stdout)
+        for line in stdout:gmatch('[^\r\n]+') do
+          if line ~= 'Avail' then widget:set_text('FS:' .. line) end
+
+        end
+      end)
   -- Create the wibox
   s.mywibox = awful.wibar({position = "bottom", screen = s})
 
@@ -138,6 +155,11 @@ awful.screen.connect_for_each_screen(function(s)
       -- mykeyboardlayout,
       -- mymem,
       -- wibox.widget.textbox(" | "),
+      wibox.widget.textbox(" | "),
+      sysdir,
+      wibox.widget.textbox(" | "),
+      homedir,
+      wibox.widget.textbox(" | "),
       mycpu,
       wibox.widget.textbox(" | "),
       mybattery,

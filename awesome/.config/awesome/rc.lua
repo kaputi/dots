@@ -98,10 +98,10 @@ require("main.signals")
 
 -- autolaunch
 awful.spawn.with_shell("picom -b")
-awful.spawn.with_shell(
-    "nitrogen --set-zoom-fill --random ~/Pictures/WallpapersDev/")
--- awful.spawn.with_shell("nitrogen --set-zoom-fill --restore")
-awful.spawn.with_shell("deadd-notificajion-center")
+-- awful.spawn.with_shell(
+--     "nitrogen --set-zoom-fill --random ~/Pictures/WallpapersDev/")
+awful.spawn.with_shell("nitrogen --set-zoom-fill --restore")
+awful.spawn.with_shell("deadd-notification-center")
 awful.spawn.with_shell("traylaunch.sh")
 -- awful.spawn.with_shell("xbindkeys")
 -- awful.spawn.with_shell("libinput-gestures-setup start")
@@ -116,4 +116,4 @@ awful.spawn.with_shell(
 
 -- beautiful.useless_gap = 5
 
-beautiful.gap_single_client = false
+-- beautiful.gap_single_client = false

@@ -14,7 +14,9 @@ theme.bg_normal = gmc.color['black'] .. "cc"
 theme.bg_focus = gmc.color['red300'] .. "cc"
 theme.bg_urgent = gmc.color['orange900'] .. "cc"
 theme.bg_minimize = gmc.color['grey500'] .. "cc"
-theme.bg_systray = gmc.color['grey800'] .. "cc"
+
+theme.bg_systray = gmc.color['grey800']
+theme.systray_icon_spacing = dpi(2)
 
 theme.fg_normal = gmc.color['white']
 theme.fg_focus = gmc.color['white']
@@ -28,6 +30,13 @@ theme.border_width = dpi(1)
 theme.border_normal = gmc.color['grey900'] .. "cc"
 theme.border_focus = gmc.color['grey700'] .. "cc"
 theme.border_marked = gmc.color['orange500'] .. "cc"
+
+-- Status Bar
+
+-- theme.wibar_border_width = dpi(1)
+-- theme.wibar_border_color = gmc.color['grey700'] .. "cc"
+theme.wibar_height = dpi(23)
+theme.wibar_bg = gmc.color['black'] .. "01"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -48,18 +57,18 @@ theme.border_marked = gmc.color['orange500'] .. "cc"
 -- theme.taglist_bg_occupied = gmc.color['black']
 -- theme.taglist_fg_occupied = gmc.color['white']
 
-theme.taglist_bg_focus = gmc.color['black'] .. "cc"
+theme.taglist_bg_focus = gmc.color['black'] .. "01"
 -- theme.taglist_bg_focus = "png:" .. theme_path ..
 --                              "misc/copycat-holo/taglist_bg_focus.png"
 theme.taglist_fg_focus = gmc.color['green400']
-theme.taglist_bg_empty = gmc.color['black']
+theme.taglist_bg_empty = gmc.color['black'] .. "01"
 theme.taglist_fg_empty = gmc.color['white']
-theme.taglist_bg_occupied = gmc.color['black']
+theme.taglist_bg_occupied = gmc.color['black'] .. "01"
 theme.taglist_fg_occupied = gmc.color['white']
 
-theme.tasklist_bg_normal = gmc.color['black']
+theme.tasklist_bg_normal = gmc.color['black'] .. "01"
 -- theme.tasklist_bg_normal = "png:" .. theme_path .. "misc/copycat-holo/bg_focus.png"
-theme.tasklist_bg_focus = gmc.color['black']
+theme.tasklist_bg_focus = gmc.color['black'] .. "01"
 -- theme.tasklist_bg_focus  = "png:" .. theme_path .. "misc/copycat-holo/bg_focus_noline.png"
 theme.tasklist_fg_focus = gmc.color['white']
 theme.tasklist_fg_normal = gmc.color['grey700']
