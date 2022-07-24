@@ -1,0 +1,10 @@
+[user]
+  email = edu_loni3@hotmail.com 
+  name = Eduardo Lonighi
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred:h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[core]
+  pager = less -FRSX
+  editor = towervim
+[credential]
+  helper = cache
