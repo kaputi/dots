@@ -1,0 +1,123 @@
+/** Configured For Applets **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Papirus";
+  location: 5;
+  yoffset: -50;
+  xoffset: -20;
+	terminal: "alacritty";
+}
+
+* {
+
+
+	background: 							#292f3455;
+	background-color: 				#292f3455;
+	foreground: 							 #ffffff;
+	selected:						 			 #126d7aff;
+	selected-foreground:         @foreground;
+
+////	common - active and urgent
+    urgent-background:           #800000FF;
+    urgent-foreground:           @foreground;
+    selected-urgent-background:  @urgent-foreground;
+    selected-urgent-foreground:  @urgent-background;
+
+
+////	TEXT	////
+
+	font:				"Monaco 30px";
+//    font:				"Knack Nerd Font 16px";
+    text-color:			@foreground;
+
+////	PADDING ETC	////
+
+	margin:				0px;
+	border:				0px;
+	padding:			0px;
+	spacing:			0px;
+	elementpadding:		2px 0px;
+	elementmargin:		0px 2px;
+	listmargin:			0px 2px 0px 0px;
+
+////	POSITION	////
+
+	location:		center;
+	anchor:			center;
+	x-offset:		0px;
+	y-offset:		0px;
+
+////	LAYOUT	////
+
+	scrollbar:		true;
+}
+
+//desktop-submenu
+dt-mainbox {
+	orientation:	vertical;
+	children:		[ boxdummy, sb-mainbox ];
+}
+horibox {
+	orientation:	horizontal;
+	children:		[ listview, mode-switcher ];
+}
+mode-switcher {
+	orientation:	vertical;
+}
+button {
+	horizontal-align:	0;
+	padding:		@buttonpadding;
+	width:			@buttonwidth;
+	background-color:	@button-bg;
+	expand:			false;
+}
+vertibox {
+	orientation:	vertical;
+	children:		[ inputbar, listview ];
+	background-color:	@background;
+}
+prompt {
+	enabled:		false;
+}
+listview {
+	margin:			@listmargin;
+}
+scrollbar {
+	handle-width:	0.5ch;
+	handle-color:	@selected;
+}
+boxdummy {
+	enabled:		false;
+	orientation:	vertical;
+	expand:			false;
+	children:		[ textboxdummy ];
+}
+textboxdummy {
+	str:			" ";
+}
+element, inputbar, textboxdummy {
+	padding:		@elementpadding;
+	margin:			@elementmargin;
+	width:			@elementwidth;
+}
+element.normal.active,
+element.alternate.active {
+	background-color:	@active-background;
+	text-color:			@selected-foreground;
+}
+element.selected,
+button.selected {
+	background-color:	@selected;
+	text-color:			@selected-foreground;
+}
+element.normal.urgent,
+element.alternate.urgent {
+	background-color:	@urgent-background;
+	text-color:			@urgent-foreground;
+}
+element.selected.urgent {
+	background-color:	@selected-urgent-background;
+	text-color:			@selected-urgent-foreground;
+}
+/* vim:ft=css
