@@ -16,10 +16,19 @@ local _M = {}
 -- reading
 -- https://awesomewm.org/wiki/Global_Keybindings
 
+local beautiful = require('beautiful')
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 function _M.get()
   local globalkeys = gears.table.join(
+
+    awful.key(
+      { modkey },
+      'p',
+      require('dunstPause').pause(),
+      { description = 'Pause dunst notifications', group = 'awesome' }
+    ),
+
     awful.key(
       { modkey },
       '/',
