@@ -95,6 +95,10 @@ bindkey '^e' edit-command-line
 
 #dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias dotstatus='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME status'
+alias dotadd='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME add -u'
+alias dotcommit='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME commit'
+alias dotpush='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME push'
 
 # systemctl
 alias ctl='sudo systemctl'
