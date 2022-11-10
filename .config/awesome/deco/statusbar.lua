@@ -88,6 +88,18 @@ awful.screen.connect_for_each_screen(function(s)
       end
     end
   )
+  
+  local storageDir = awful.widget.watch(
+    'df -h --output=avail /dev/sdb2',
+    30,
+    function(widget, stdout)
+      for line in stdout:gmatch('[^\r\n]+') do
+        if line ~= 'Avail' then
+          widget:set_text('STORAGE:' .. line)
+        end
+      end
+    end
+  )
 
   local sysdir = awful.widget.watch(
     'df -h --output=avail /dev/nvme0n1p2',
@@ -123,6 +135,8 @@ awful.screen.connect_for_each_screen(function(s)
       sysdir,
       wibox.widget.textbox(' | '),
       homedir,
+      wibox.widget.textbox(' | '),
+      storageDir,
       wibox.widget.textbox(' | '),
       mycpu,
       wibox.widget.textbox(' | '),

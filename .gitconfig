@@ -4,7 +4,10 @@
 [alias]
   lg = log --color --graph --pretty=format:'%Cred:h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
-  pager = less -FRSX
+  ; pager = less -FRSX
+  pager = ydiff -p cat -s --wrap 
   editor = towervim
 [credential]
   helper = cache
+[safe]
+	directory = /home/eduardo/code/cortezaWP

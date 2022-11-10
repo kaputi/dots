@@ -1,4 +1,8 @@
 * {
+    elementwidth : 50%;
+    buttonpadding: 2px 0px;
+    buttonwidth: 100px;
+    button-bg: var(background);
     alternate-urgent-background: var(lightbg);
     selected-urgent-foreground:  var(urgent-background);
     alternate-active-foreground: var(blue);

@@ -51,4 +51,4 @@ export PATH=$PATH:$HOME/.local/bin
 export ZPLUG_HOME=$HOME/.config/zplug
 
 # export EDITOR="nv"
-export EDITOR="newvim"
+export EDITOR="towervim"

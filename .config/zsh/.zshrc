@@ -96,6 +96,7 @@ bindkey '^e' edit-command-line
 #dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias dotstatus='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME status'
+alias dotlg='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME lg'
 alias dotadd='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME add -u'
 alias dotcommit='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME commit'
 alias dotpush='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME push'
@@ -122,8 +123,10 @@ alias linode='ssh eduardo@lonighicode.com'
 alias archserver='ssh eduardo@176.58.110.157'
 
 #mount alma smb
-alias alma-mount='sudo mount -t cifs //172.26.0.5/ALMA /home/eduardo/alma-mount -o username=eduardo.lonighi,password=Alma02!'
-alias alma-umount='sudo umount alma-mount'
+# alias start-library='cd /home/eduardo/alma/web-volume-viewer && yarn dev'
+alias start-library='cd /home/eduardo/alma/web-volume-viewer && yarn startPy3'
+alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && yarn dev-live'
+alias start-viewer-local='cd /home/eduardo/alma/web-viewer && yarn start-local & kitty -d /home/eduardo/alma/backend-visor-node yarn start '
 # dir size
 alias dirsize='du -h -d 1'
 alias sudodirsize='sudo du -h -d 1'

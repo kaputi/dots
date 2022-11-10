@@ -25,8 +25,13 @@ function _M.get()
     awful.key(
       { modkey },
       'p',
-      require('dunstPause').pause(),
-      { description = 'Pause dunst notifications', group = 'awesome' }
+      function ()
+        -- local scrn = awful.screen.focused()
+        -- scrn.mywibox.bg = '#ff0000'
+      end,
+      { description = 'testy', group ='awesome'}
+      -- require('dunstPause').pause(),
+      -- { description = 'Pause dunst notifications', group = 'awesome' }
     ),
 
     awful.key(
