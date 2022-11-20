@@ -52,3 +52,6 @@ export ZPLUG_HOME=$HOME/.config/zplug
 
 # export EDITOR="nv"
 export EDITOR="towervim"
+
+# zk dir
+export ZK_NOTEBOOK_DIR=$HOME/Documents/zk

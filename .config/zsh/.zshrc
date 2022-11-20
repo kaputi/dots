@@ -153,6 +153,7 @@ alias e='emacsclient -c -a emacs'
 alias cp="cp -i"                          # confirm before overwriting something
 # alias rm="rm -i"                          # confirm before removing
 alias urm="/bin/rm -i"                          # confirm before removing
+alias rrm="/bin/rm -i"                          # confirm before removing
 alias rm="saferm.sh"                          # confirm before removing
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
