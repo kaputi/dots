@@ -101,6 +101,7 @@ alias dotadd='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME add 
 alias dotaddnew='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME add'
 alias dotcommit='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME commit'
 alias dotpush='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME push'
+alias lazydotfiles='lazygit --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
 # systemctl
 alias ctl='sudo systemctl'
