@@ -1,0 +1,3 @@
+#!/bin/sh
+mkdir -p
+scrot -s -i $HOME'/Pictures/screenshots/%d-%m-%Y_%H-%M-%S.png'

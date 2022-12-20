@@ -1,0 +1,210 @@
+#!/bin/sh
+
+COMPONENT_TYPE=class
+
+echo 
+echo '========================================='
+echo 
+echo 'Select the component type:'
+PS3='type the number for the type:'
+
+options=('Class Component' 'Class Component with Redux' 'Stateless Component' 'Stateless Component with Redux')
+
+select opt in "${options[@]}"
+do 
+  case $opt in
+    "Class Component")
+      COMPONENT_TYPE=class
+      break 
+      ;;
+    "Class Component with Redux")
+     COMPONENT_TYPE=class_redux
+      break
+      ;;
+    "Stateless Component")
+      COMPONENT_TYPE=stateless
+      break
+      ;;
+    "Stateless Component with Redux")
+      COMPONENT_TYPE=stateless_redux
+      break
+      ;;
+  esac
+done
+
+
+echo
+echo "====================="
+echo "Component Name:"
+
+read COMPONENT_NAME
+
+COMPONENT_DIR=$PWD/$COMPONENT_NAME
+
+mkdir $COMPONENT_DIR
+
+# create index file
+cat<<EOF > $COMPONENT_DIR/index.js
+import $COMPONENT_NAME from './$COMPONENT_NAME'
+
+export default $COMPONENT_NAME
+EOF
+
+## create styles
+cat <<EOF > $COMPONENT_DIR/$COMPONENT_NAME.styles.js
+import { StyleSheet } from 'react-native'
+
+const styles = StyleSheet.create({
+  ${COMPONENT_NAME}Wrapper:{
+    flex:1,
+  },
+})
+
+export default styles
+EOF
+
+# Create component
+if [ $COMPONENT_TYPE == class ];
+then
+cat <<EOF > $COMPONENT_DIR/$COMPONENT_NAME.js 
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+// import T from 'prop-types'
+
+import styles from './${COMPONENT_NAME}.styles'
+
+export default class ${COMPONENT_NAME} extends Component {
+  
+  // static propTypes = {
+  //   blabla : T.string,
+  // }
+  
+  // static defaultProps = {
+  //   blabla = 'blabla'
+  // }
+
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+
+  render(){
+    return(
+      <View style={styles.${COMPONENT_NAME}Wrapper}>
+        <Text>$COMPONENT_NAME</Text>
+      </View>
+    )
+  }
+}
+EOF
+fi
+
+if [ $COMPONENT_TYPE == class_redux ];
+then
+cat <<EOF > $COMPONENT_DIR/$COMPONENT_NAME.js 
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+// import T from 'prop-types'
+
+import styles from './${COMPONENT_NAME}.styles'
+
+class ${COMPONENT_NAME} extends Component {
+  
+  // static propTypes = {
+  //   blabla : T.string,
+  // }
+  
+  // static defaultProps = {
+  //   blabla = 'blabla'
+  // }
+
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+
+  render(){
+    return(
+      <View style={styles.${COMPONENT_NAME}Wrapper}>
+        <Text>$COMPONENT_NAME</Text>
+      </View>
+    )
+  }
+}
+
+const mapStateToProps = ({state}) => {
+  const {prop} = state
+  return({prop})
+}
+
+export default connect(mapStateToProps)($COMPONENT_NAME)
+EOF
+fi
+
+if [ $COMPONENT_TYPE == stateless ] ;
+then
+cat <<EOF > $COMPONENT_DIR/$COMPONENT_NAME.js 
+import React from 'react'
+import { View, Text } from 'react-native'
+// import T from 'prop-types'
+
+import styles from './$COMPONENT_NAME.styles'
+
+const $COMPONENT_NAME = (props) => {
+  return(
+    <View style={styles.${COMPONENT_NAME}Wrapper}>
+      <Text>$COMPONENT_NAME</Text>
+    </View>
+  )
+}
+
+// $COMPONENT_NAME.propTypes = {
+//   blabla : T.string,
+// }
+
+// $COMPONENT_NAME.defaultProps = {
+//   blabal: 'blabla'
+// }
+
+export default $COMPONENT_NAME
+EOF
+fi
+
+if [ $COMPONENT_TYPE == stateless_redux ] ;
+then
+cat <<EOF > $COMPONENT_DIR/$COMPONENT_NAME.js 
+import React from 'react'
+import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+// import T from 'prop-types'
+
+import styles from './$COMPONENT_NAME.styles'
+
+const $COMPONENT_NAME = (props) => {
+  return(
+    <View style={styles.${COMPONENT_NAME}Wrapper}>
+      <Text>$COMPONENT_NAME</Text>
+    </View>
+  )
+}
+
+// $COMPONENT_NAME.propTypes = {
+//   blabla : T.string,
+// }
+
+// $COMPONENT_NAME.defaultProps = {
+//   blabal: 'blabla'
+// }
+
+
+const mapStateToProps = ({state}) => {
+  const {prop} = state
+  return({prop})
+}
+
+export default connect(mapStateToProps)($COMPONENT_NAME)
+EOF
+fi

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "YOU ARE ABOUT TO DELETE THE FOLLOWING NODE MODULES "
+find . -name 'node_modules' -type d -prune | while read line; do
+  echo $line
+done
+echo "====================================================="
+
+read -r -p  "are you sure???? [y/N] "  response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+
+  echo  "bye bye node_modules...."
+  find . -name node_modules -type d -prune -exec trash {} +
+
+fi

@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+
+COLEMAK=$(setxkbmap -query)
+
+
+if [[ $COLEMAK == *"colemak"* ]]; then
+
+  setxkbmap gb
+else
+  setxkbmap -variant colemak
+fi

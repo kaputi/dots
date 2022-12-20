@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CURRENTBRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+
+
+if [ "master" == "$CURRENTBRANCH" ]; then 
+  echo "====== Deploying master branch ======"
+
+  git push origin master
+
+else
+
+  echo "Not on master branch"
+
+fi

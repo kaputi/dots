@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CURRENTBRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+
+
+if [ "dev" == "$CURRENTBRANCH" ]; then 
+  echo "====== Pushing dev branch ======"
+
+  git push origin dev
+
+else
+
+  echo "Not on dev branch"
+
+fi

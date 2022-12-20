@@ -1,0 +1,51 @@
+#!/bin/bash
+
+killall screen
+cwd=$(pwd)
+
+
+if [ "$1" = "--help" ]; then
+  echo "TODO: create help"
+  echo "flags: --no-monitor --no-upload --only-monitor"
+  exit 1
+fi
+
+FQBN=$(arduino-cli board list | grep -o -E "arduino:[a-z]*:[a-z]*")
+TTY_PORT=$(arduino-cli board list | grep "arduino" | awk '{print $1}')
+
+echo "----------------------"
+echo "BOARD: $FQBN"
+echo "TTY: $TTY_PORT"
+echo "----------------------"
+
+# find .ino file in current dir
+SKETCH=$(find $cwd -type f -name "*.ino")
+
+if [ "$1" = "--only-monitor" ]; then
+  # kitty --detach  screen /dev/ttyACM0 9600 
+  kitty --detach  screen /dev/ttyACM0 115200 
+  exit 1
+fi
+
+if [ "$#" = "0" ]; then
+  arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
+  # kitty --detach --hold screen /dev/ttyACM0 9600 
+  # kitty --detach screen /dev/ttyACM0 9600 
+  kitty --detach screen /dev/ttyACM0 115200 
+  exit 1
+fi
+
+
+if [ "$1" = "--no-upload" ]; then
+  arduino-cli compile --clean --fqbn $FQBN $SKETCH
+  exit 1
+fi
+
+if [ "$1" = "--no-monitor" ]; then
+  arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
+  exit 1
+fi
+
+echo "Invalid argument choose one of : --no-monitor --no-upload --only-monitor"
+exit 1
+

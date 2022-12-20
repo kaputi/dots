@@ -1,0 +1,33 @@
+#!/bin/bash
+
+declare -a options=(
+"Shutdown"
+"Restart"
+"Hibernate"
+)
+
+# Piping the above array into dmenu.
+# We use "printf '%s\n'" to format the array one item to a line.
+choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Power Menu:')
+
+# What to do when/if we choose a file to edit.
+if [ "$choice" ]; then
+
+	if [ "$choice"  = "Shutdown" ]; then
+		shutdown now
+	fi
+
+	if [ "$choice"  = "Restart" ]; then
+		reboot
+	fi
+
+	if [ "$choice"  = "Hibernate" ]; then
+		# blurlock && systemctl hibernate
+		systemctl hibernate
+	fi
+
+# What to do if we just escape without choosing anything.
+else
+		echo "Program terminated." && exit 0
+fi
+

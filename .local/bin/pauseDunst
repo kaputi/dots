@@ -1,0 +1,9 @@
+#!/bin/bash
+
+minutes=60
+delay=$(($minutes * 60))
+echo $delay
+
+dunstctl set-paused true
+sleep $delay
+dunstctl set-paused false

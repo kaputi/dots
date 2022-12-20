@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+OUTPUT=$(setxkbmap -print)
+
+if [[ $OUTPUT == *"capslock(escape)"* ]]; then
+  setxkbmap -option ""
+else
+  setxkbmap -option "caps:escape"
+fi

@@ -1,0 +1,49 @@
+#!/bin/sh
+
+CURRENT_LIGHT=$(xbacklight -get)
+
+
+function round() {
+  printf "%.${2}f" "${1}"
+}
+
+CURRENT_L=$(round $CURRENT_LIGHT 0)
+
+if [ $1 = "-inc" ]; then
+  if [ $CURRENT_L -lt 1 ]; then 
+    xbacklight -set 1
+  fi
+  if [ $CURRENT_L -lt 5 ] && [ $CURRENT_L -ge 1 ]; then
+    xbacklight -set 5
+  fi
+
+  if [ $CURRENT_L -ge 5 ] && [ $CURRENT_L -le 25 ]; then
+    xbacklight -inc 5
+  fi
+
+  if [ $CURRENT_L -gt 25 ]; then
+    xbacklight -inc 10
+  fi
+fi
+
+if [ $1 = "-dec" ]; then
+  if [ $CURRENT_L = 1 ]; then 
+    xbacklight -set 0
+  fi
+  if [ $CURRENT_L -le 5 ] && [ $CURRENT_L -gt 1 ]; then
+    xbacklight -set 1
+  fi
+
+  if [ $CURRENT_L -gt 5 ] && [ $CURRENT_L -le 25 ]; then
+    xbacklight -dec 5
+  fi
+
+  if [ $CURRENT_L -gt 25 ]; then
+    xbacklight -dec 10
+  fi
+fi
+
+
+# notify-send.py --app-name=myBacklight --replaces-process=myBacklight -t 1000 -u low  "Brightness" "$(round $(xbacklight -get) 0) %"
+
+ notify-send --app-name=myBacklight -t 1000 -u low  "Brightness" "$(round $(xbacklight -get) 0) %"

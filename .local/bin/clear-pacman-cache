@@ -1,0 +1,33 @@
+#!/bin/sh
+
+CACHE_SIZE=$(du -sh /var/cache/pacman/pkg/ | awk '{print $1}');
+
+PAMAC_BUILD=$(sudo du -sh /var/tmp/pamac-build-$USER| awk '{print $1}');
+
+
+echo '#####################################################'
+echo -e "\e[39mPacman cache is taking \e[1;31m $CACHE_SIZE \e[1;39m of disk space!!" 
+echo ""
+echo -e "Pamac builds are taking \e[1;31m $PAMAC_BUILD \e[1;39m of disk space!!" 
+echo "    For clean options 'check pamac clean -h'"
+echo ""
+read -r -p  "Do you want to clean pacman cache??? [y/N] "  response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+  echo "For previously installed packages type: 1"
+  echo "For all packages (including currently installed) type: 2"
+
+  read -r -p "Which one would you like to remove? " response2
+  if [[ "$response2" =~ ^([1])$ ]]
+  then 
+    echo "Removing previously installed packages" 
+    sudo pacman -Sc --noconfirm
+  fi
+
+  if [[ "$response2" =~ ^([2])$ ]]
+  then 
+    echo "Removing all packages" 
+    sudo pacman -Scc --noconfirm
+  fi
+
+fi
