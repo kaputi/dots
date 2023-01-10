@@ -70,6 +70,8 @@ function _M.get(clientkeys, clientbuttons)
         class = {
           'microsoft teams - insiders',
           'Microsoft Teams - Insiders',
+          'Microsoft Teams - Preview',
+          'microsoft teams - preview',
           'slack',
           'Slack',
         },
