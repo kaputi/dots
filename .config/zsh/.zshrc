@@ -119,17 +119,17 @@ alias lt='ls --tree --depth 3'
 alias lta='ls --tree'
 
 #ssh conect to linode scumbags
-alias linode='ssh eduardo@lonighicode.com'
+# alias linode='ssh eduardo@lonighicode.com'
 
 #ssh to cconecct to archserver
-alias archserver='ssh eduardo@176.58.110.157'
+# alias archserver='ssh eduardo@176.58.110.157'
 
 #mount alma smb
 # alias start-library='cd /home/eduardo/alma/web-volume-viewer && yarn dev'
 alias start-library='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 && yarn startPy3'
 # alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.20.0 && yarn dev-live'
 alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 && yarn dev-live'
-alias start-viewer-local='cd /home/eduardo/alma/web-viewer && yarn start-local & kitty -d /home/eduardo/alma/backend-visor-node yarn start '
+# alias start-viewer-local='cd /home/eduardo/alma/web-viewer && yarn start-local & kitty -d /home/eduardo/alma/backend-visor-node yarn start '
 # dir size
 alias dirsize='du -h -d 1'
 alias sudodirsize='sudo du -h -d 1'
@@ -141,6 +141,8 @@ alias cat='bat'
 # exit vim style
 alias :q='exit'
 alias :Q='exit'
+alias q='eixt'
+alias Q='exit'
 
 alias vim='nvim'
 # alias nv='nvim'
@@ -151,7 +153,7 @@ alias vim='nvim'
 alias nv='towervim'
 
 # alias e='sw emacsclient -c'
-alias e='emacsclient -c -a emacs'
+# alias e='emacsclient -c -a emacs'
 
 alias cp="cp -i"                          # confirm before overwriting something
 # alias rm="rm -i"                          # confirm before removing
@@ -161,37 +163,9 @@ alias rm="saferm.sh"                          # confirm before removing
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 
-# alias nnn='NNN_FIFO="$(mktemp -u)" nnn'
-# nnn quit cd
-n ()
-{
-    # Block nesting of nnn in subshells
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-        echo "nnn is already running"
-        return
-    fi
-
-    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, remove the "export" as in:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    # NOTE: NNN_TMPFILE is fixed, should not be modified
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
-
-    nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-    fi
-}
-
-
+# tmux
+alias t='tmux attach || tmux new'
+alias tt='tmux new'
 
 ###################################extract############################################
 # # ex - archive extractor
@@ -219,18 +193,3 @@ ex ()
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-# Codi
-# Usage: codi [filetype] [filename]
-codi() {
-  local syntax="${1:-python}"
-  shift
-  vim -c \
-    "let g:startify_disable_at_vimenter = 1 |\
-    set bt=nofile ls=0 noru nonu nornu |\
-    hi ColorColumn ctermbg=NONE |\
-    hi VertSplit ctermbg=NONE |\
-    hi NonText ctermfg=0 |\
-    Codi $syntax" "$@"
-}
