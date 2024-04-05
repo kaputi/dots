@@ -126,14 +126,16 @@ alias archserver='ssh eduardo@176.58.110.157'
 
 #mount alma smb
 # alias start-library='cd /home/eduardo/alma/web-volume-viewer && yarn dev'
-alias start-library='cd /home/eduardo/alma/web-volume-viewer && yarn startPy3'
-alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && yarn dev-live'
+alias start-library='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 && yarn startPy3'
+# alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.20.0 && yarn dev-live'
+alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 && yarn dev-live'
 alias start-viewer-local='cd /home/eduardo/alma/web-viewer && yarn start-local & kitty -d /home/eduardo/alma/backend-visor-node yarn start '
 # dir size
 alias dirsize='du -h -d 1'
 alias sudodirsize='sudo du -h -d 1'
 
 #pretty cat
+alias ccat='/bin/cat'
 alias cat='bat'
 
 # exit vim style

@@ -97,18 +97,20 @@ require("main.signals")
 --
 
 -- autolaunch
-awful.spawn.with_shell("picom -b")
+-- awful.spawn.with_shell("picom -b")
 -- awful.spawn.with_shell(
 --     "nitrogen --set-zoom-fill --random ~/Pictures/WallpapersDev/")
+awful.spawn.with_shell("/home/eduardo/.screenlayout/MyScreenLayout.sh")
 awful.spawn.with_shell("nitrogen --set-zoom-fill --restore")
 awful.spawn.with_shell("dunst")
 awful.spawn.with_shell("traylaunch.sh")
 -- awful.spawn.with_shell("xbindkeys")
-awful.spawn.with_shell("batteryAlert.sh")
+-- awful.spawn.with_shell("batteryAlert.sh")
 -- awful.spawn.with_shell("emacs --daemon")
 awful.spawn.with_shell(
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 awful.spawn.with_shell("capsEscape")
+awful.spawn.with_shell("birdtray")
 
 -- beautiful.useless_gap = 5
 

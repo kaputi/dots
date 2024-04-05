@@ -16,6 +16,7 @@ theme.bg_urgent = gmc.color['orange900'] .. "cc"
 theme.bg_minimize = gmc.color['grey500'] .. "cc"
 
 -- theme.bg_systray = gmc.color['grey800']
+theme.bg_systray = gmc.color['black'] .. "01"
 theme.systray_icon_spacing = dpi(2)
 
 theme.fg_normal = gmc.color['white']

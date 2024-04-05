@@ -47,6 +47,10 @@
 #
 #
 source /usr/share/nvm/init-nvm.sh
+
+# latest node fails in library unless this is set
+NODE_OPTIONS=--openssl-legacy-provider
+
 export PATH=$PATH:$HOME/.local/bin
 export ZPLUG_HOME=$HOME/.config/zplug
 
@@ -55,3 +59,7 @@ export EDITOR="towervim"
 
 # zk dir
 export ZK_NOTEBOOK_DIR=$HOME/Documents/zk
+
+# go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin

@@ -3,49 +3,160 @@
 killall screen
 cwd=$(pwd)
 
+function show_help {
+  echo "TODO: create proper help"
+  echo "-c : only compiles"
+  echo "-n : no monitor, compiles and uploads but doesnt start monitor "
+  echo "-m : only show monitor" 
+  echo "-b option : set baud rate" 
+  exit 1
+}
 
 if [ "$1" = "--help" ]; then
-  echo "TODO: create help"
-  echo "flags: --no-monitor --no-upload --only-monitor"
-  exit 1
+  show_help
 fi
 
 FQBN=$(arduino-cli board list | grep -o -E "arduino:[a-z]*:[a-z]*")
 TTY_PORT=$(arduino-cli board list | grep "arduino" | awk '{print $1}')
+BAUD=115200
+SLEEP_TIME=2
 
-echo "----------------------"
-echo "BOARD: $FQBN"
-echo "TTY: $TTY_PORT"
-echo "----------------------"
 
 # find .ino file in current dir
 SKETCH=$(find $cwd -type f -name "*.ino")
 
-if [ "$1" = "--only-monitor" ]; then
-  # kitty --detach  screen /dev/ttyACM0 9600 
-  kitty --detach  screen /dev/ttyACM0 115200 
-  exit 1
-fi
+function echo_variables {
+  echo "----------------------"
+  echo "BOARD: $FQBN"
+  echo "TTY: $TTY_PORT"
+  echo "BAUD: $BAUD"
+  echo "SKETCH: ${SKETCH}"
+  echo "----------------------"
+}
 
-if [ "$#" = "0" ]; then
-  arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
-  # kitty --detach --hold screen /dev/ttyACM0 9600 
-  # kitty --detach screen /dev/ttyACM0 9600 
-  kitty --detach screen /dev/ttyACM0 115200 
-  exit 1
-fi
+MONITOR_ONLY=false
+COMPILE_ONLY=false
+NO_MONITOR=false
 
+while getopts 'nmcb:' OPTION; do
+  case "$OPTION" in
+    n)
+      NO_MONITOR=true
+      ;;
+    m)
+      MONITOR_ONLY=true
+      ;;
+    c)
+      COMPILE_ONLY=true
+      ;;
+    b)
+      BAUD="$OPTARG"
+      ;;
+    ?)
+      # echo "script usage: $(basename \$0) [-n] [-m] [-c] [-b somevalue]" >&2
+      show_help
+      exit 1
+      ;;
+  esac
+done
+shift "$(($OPTIND -1))"
 
-if [ "$1" = "--no-upload" ]; then
+function monitor_same_window {
+  echo "Starting monitor"
+  sleep $SLEEP_TIME
+  screen ${TTY_PORT} ${BAUD}
+}
+
+function monitor_other_window {
+  echo "Starting monitor in separate window"
+  sleep $SLEEP_TIME
+  kitty screen ${TTY_PORT} ${BAUD} &
+}
+
+function compile_no_upload {
+  echo "Compiling with no upload"
+  sleep $SLEEP_TIME
   arduino-cli compile --clean --fqbn $FQBN $SKETCH
-  exit 1
-fi
+}
 
-if [ "$1" = "--no-monitor" ]; then
+function compile_upload {
+  echo "Compiling with upload"
+  sleep $SLEEP_TIME
   arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
+}
+
+# MONITOR_ONLY=false
+# COMPILE_ONLY=false
+# NO_MONITOR=false
+
+echo_variables 
+
+if [ "$COMPILE_ONLY" = true ] ; then
+  compile_no_upload
   exit 1
 fi
 
-echo "Invalid argument choose one of : --no-monitor --no-upload --only-monitor"
+if [ "$MONITOR_ONLY" = true ] ; then
+  monitor_same_window
+  exit 1
+fi
+
+
+if [ "$NO_MONITOR" = true ] ; then
+  compile_upload
+  exit 1
+fi
+
+echo "Compiling, uploading, and starting monitor"
+sleep $SLEEP_TIME
+compile_upload
+monitor_other_window
 exit 1
+
+
+
+
+# if [ "$1" = "--only-monitor" ]; then
+#   # kitty --detach  screen /dev/ttyACM0 9600 
+#   kitty --detach  screen /dev/ttyACM0 115200 
+#   exit 1
+# fi
+
+# if [ "$#" = "0" ]; then
+#   arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
+
+#   echo "Starting Serial Monitor at ${TTY_PORT} with baud ${BAUD}"
+
+#   # kitty --detach --hold screen /dev/ttyACM0 9600 
+#   # kitty --detach screen /dev/ttyACM0 9600 
+
+#   # kitty --detach screen /dev/ttyACM0 115200 
+
+#   # kitty screen /dev/ttyACM0 115200 &
+#   kitty screen ${TTY_PORT} 115200 &
+
+#   # kitty --listen-on unix:/tmp/kittySerialMonitor
+#   # sleep 5
+#   # kitty @ --to unix:/tmp/kittySerialMonitor send-text screen /dev/ttyACM0 115200$'\n'
+#   # echo 'Serial Monitor Ready'
+
+#   # echo 'Starting Serial Monitor'
+#   # kitty @ launch --title 'SerialMonitor' --keep-focus screen /dev/ttyACM0 115200
+#   # kitty @ detach-window --match 'title:^SerialMonitor'
+#   exit 1
+# fi
+
+
+# if [ "$1" = "--no-upload" ]; then
+#   arduino-cli compile --clean --fqbn $FQBN $SKETCH
+#   exit 1
+# fi
+
+# if [ "$1" = "--no-monitor" ]; then
+#   arduino-cli compile --clean --upload --fqbn $FQBN  -p $TTY_PORT $SKETCH
+#   exit 1
+# fi
+
+# echo "Invalid argument choose one of : --no-monitor --no-upload --only-monitor"
+# exit 1
 
