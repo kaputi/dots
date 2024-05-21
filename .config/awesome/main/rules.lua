@@ -78,9 +78,20 @@ function _M.get(clientkeys, clientbuttons)
           'slack',
           'Slack',
           'teams-for-linux',
+          'crx_cifhbcnohmdccbgoicgdjpfamggdegmo',
+        },
+        name = {
+          'Microsoft Teams - Chat',
+          'Microsoft Teams',
+          'WhatsApp Web',
         },
       },
-      properties = { screen = 2, tag = '9', switchtotag = false },
+      properties = {
+        screen = 2,
+        tag = '9',
+        switchtotag = false,
+        floating = false,
+      },
     },
 
     -- Chrome oppens on tag with name 2 on screen 1

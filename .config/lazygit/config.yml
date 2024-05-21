@@ -77,9 +77,11 @@ git:
     parseEmoji: false
     diffContextSize: 5 # how many lines of context are shown around a change in diffs
 os:
-    editCommand: '' # see 'Configuring File Editing' section
-    editCommandTemplate: ''
-    openCommand: ''
+    # editCommand: 'tv2' # see 'Configuring File Editing' section
+    # editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
+    # editCommandTemplate: '{{editor}} --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
+    # openCommand: 'tv2'
+    edit: 'tv2 --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
 refresher:
     refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled via option 'git.autoRefresh'.
     fetchInterval: 60 # Re-fetch interval in seconds. Auto-fetch can be disabled via option 'git.autoFetch'.

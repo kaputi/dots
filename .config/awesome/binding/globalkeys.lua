@@ -126,7 +126,7 @@ function _M.get()
       { description = 'Reload Awesome', group = 'awesome' }
     ),
     awful.key(
-      { modkey, 'Shift' },
+      { modkey, 'Control' },
       'q',
       awesome.quit,
       { description = 'Quit Awesome', group = 'awesome' }
